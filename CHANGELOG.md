@@ -13,14 +13,19 @@
   - Rule 24 **CONTINUATION HANDOFF**: output không fit 1 response → làm tối đa + lưu progress vào `memory-bank/activeContext.md` + in block `⏩ TIẾP TỤC REQUEST SAU` với prompt copy-paste cho user.
 - **Added section 8.1 Continuation Handoff block** trong base.md — chuẩn hóa block append cuối response khi rule 24 kích hoạt.
 - **Sync rule list** — `AGENTS.md` và `.github/copilot-instructions.md` mirror đủ 24 rules.
-- **Added `samples/gather-context.md`** — sample mới cho thu thập context lần đầu vào project: scan tối đa, ghi thẳng `memory-bank/`, hỗ trợ Continuation Handoff khi 1 request không đủ.
+- **Upgraded `samples/` to 10/10 quality bar (toàn bộ 6 file)**:
+  - `gather-context.md` v1.0 → v2.0 — thêm USER INPUT block, evidence ledger riêng (`memory-bank/_evidence-ledger.md`), coverage log (`memory-bank/_coverage-log.md`), write-policy enforcement (fill-only/merge/overwrite), per-section confidence, quality scorecard 100đ, instruction boundaries (anti-prompt-injection), execution strategy 11 bước, halt conditions chi tiết.
+  - `fix-explain.md` v1.0 → v2.0 — đổi từ 4-section single file sang 6 file folder output (summary, evidence-and-hypothesis, bug-location-and-cause, fix-options-and-tradeoffs, applied-fix-and-tests, rollback-and-followup); thêm hypothesis ledger ≥ 2 hypothesis với verdict CONFIRMED/REJECTED/INCONCLUSIVE; bắt buộc repro proof trước fix; ≥ 2 fix options với trade-off; regression test bắt buộc; Production-incident mode khi only-prod.
+  - `refactor-loop.md` v1.0 → v2.0 — thêm output folder rời với `iterations.md` (audit log append-only) + `final-report.md`; behavior preservation matrix per iteration; pattern alignment check (examples/ + systemPatterns.md); max-iterations cap + backout plan; bulk edit > 3 file dry-run riêng + Confirmation Gate riêng.
 - **Production-grade primitives** đã có từ v3.1.3 vẫn áp dụng: `dry-run.md`, `rollback-plan.md`, `self-verify.md`, multi-lens 5×5 trong Mode 1, depth-first rule, halt-conditions 23 điều kiện, multi-tool support (Copilot / Cursor / Cline / Claude Code / Aider / Antigravity / Gemini / Codex).
-- **Updated `docs/USAGE-GUIDE.md`** thêm reference samples/gather-context.
-- **Updated `samples/README.md`** thêm gather-context vào index.
+- **Updated `docs/USAGE-GUIDE.md`** thêm reference `samples/gather-context.md`.
+- **Updated `samples/README.md`** với mô tả mới + cột input/output chi tiết cho 6 sample.
 
 ### Why
 
-Bản v3.2 đóng nốt gap cuối: lifecycle qua nhiều request. Trước đây nếu 1 task quá lớn cho 1 response, AI thường hoặc làm dở rồi ngừng, hoặc bảo "hỏi tôi ở request sau" làm user mất context. Continuation Handoff giúp AI tự lưu state vào `activeContext.md` và đưa prompt sẵn cho user paste tiếp — không cần giải thích lại từ đầu.
+Bản v3.2 đóng nốt 2 gap cuối:
+1. **Lifecycle qua nhiều request**: Continuation Handoff giúp AI tự lưu state vào `activeContext.md` và đưa prompt sẵn cho user paste tiếp — không cần giải thích lại từ đầu.
+2. **Sample quality consistency**: 6/6 samples giờ cùng tiêu chuẩn 10/10 (USER INPUT block, evidence ledger, claim ID, quality scorecard 100đ, instruction boundaries, per-file format, accuracy rules, execution strategy, halt conditions, Continuation Handoff). Trước đây 3 sample advanced (explore/trace/deep-dive) mạnh nhưng 3 sample operational (gather/fix/refactor) yếu hơn — nay đã đồng bộ.
 
 ---
 
