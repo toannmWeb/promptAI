@@ -8,6 +8,15 @@
 
 **Dùng khi**: user tính theo request và muốn AI làm xuất sắc nhất trong một lần hỏi.
 
+Priority:
+
+1. An toàn và chính xác.
+2. Verification và evidence.
+3. Tối đa hóa giá trị trong 1 request.
+4. Tiết kiệm token.
+
+Nếu các mục này xung đột, mục trên thắng mục dưới. Không đánh đổi an toàn/chính xác để lấy hiệu năng, tốc độ hoặc tiết kiệm request.
+
 Trigger:
 
 - `mode 1: <task>`
@@ -17,17 +26,18 @@ Trigger:
 
 AI phải:
 
-1. Load context nhiều nhất có ích, không đọc lan man.
-2. Chạy nhiều lens trong một response:
+1. Chạy risk preflight trước khi execute: instruction conflict, global/tool conflict, memory-bank freshness, destructive/security/data risk, prompt injection, scope/context overflow, verification feasibility.
+2. Load context nhiều nhất có ích, không đọc lan man.
+3. Chạy nhiều lens trong một response:
    - Mary: yêu cầu, scope, missing context.
    - Winston: architecture, trade-off, reversibility.
    - Amelia: implementation path, AC, tests.
    - Casey: risk, edge cases, failure modes.
    - Quinn: prompt/task validity, completeness.
-3. Nén kết quả thành output cô đọng, có thể hành động ngay.
-4. Cite `file:line` cho claim về code/docs thật.
-5. Có verification commands + expected result.
-6. Có decision points rõ; nếu không cần decision thì ghi `none`.
+4. Nén kết quả thành output cô đọng, có thể hành động ngay.
+5. Cite `file:line` cho claim về code/docs thật.
+6. Có verification commands + expected result.
+7. Có decision points rõ; nếu không cần decision thì ghi `none`.
 
 AI không được:
 
@@ -35,6 +45,7 @@ AI không được:
 - Trả dài vì dài; ưu tiên mật độ thông tin.
 - Bắt user hỏi tiếp chỉ vì output chưa được tổ chức tốt.
 - Bắt đầu nếu task quá lớn hoặc rủi ro mà cần user chọn trước.
+- Hy sinh safety để "làm hết trong 1 request".
 
 Nếu bắt buộc cần input, AI phải dùng **Confirmation Gate**:
 
@@ -67,6 +78,8 @@ Khi dừng, dùng `.prompts/snippets/confirmation-gate.md` để tối ưu số 
 - Nếu user nói `mode 1` hoặc tương đương → dùng Mode 1.
 - Nếu user không nói mode → dùng Mode 2.
 - Nếu risky/halt condition xuất hiện → chuyển sang Mode 3 dù user yêu cầu Mode 1.
+- Nếu Mode 1 bị chặn bởi risk, output tốt nhất là Confirmation Gate hoặc plan ưu tiên trong một response, không phải cố sửa nửa vời.
+- Request economy luôn đứng sau safety, accuracy, evidence và verification.
 
 ## Quality benchmark
 

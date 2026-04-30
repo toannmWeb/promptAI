@@ -117,6 +117,7 @@ echo
 echo "## 5. Command-critical prompt files"
 CRITICAL_PROMPTS=(
   ".prompts/workflows/apply-to-project.md"
+  ".prompts/workflows/overwrite-prompt-system.md"
   ".prompts/workflows/mode-1-one-shot-max.md"
   ".prompts/workflows/initialize-memory-bank.md"
   ".prompts/workflows/update-memory-bank.md"

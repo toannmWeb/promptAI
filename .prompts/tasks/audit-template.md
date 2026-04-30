@@ -72,7 +72,8 @@ Halt:
 - Stop if audit requires destructive file operations.
 
 Language:
-- Trả lời TIẾNG VIỆT.
+- Trả lời TIẾNG VIỆT CÓ DẤU.
+- Mọi từ/câu tiếng Việt phải dùng đầy đủ dấu tiếng Việt; không viết tiếng Việt không dấu.
 
 Memory-bank impact:
 - None in Template Mode unless the audit explicitly changes memory-bank templates.

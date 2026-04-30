@@ -148,5 +148,5 @@ Raw prompt:
 Task: .prompts/tasks/optimize-prompt.md
 
 Output: diagnosis + optimized prompt copy-paste ready + missing context + decision points.
-Trả lời TIẾNG VIỆT. Cite file:line nếu nói về file thật trong repo.
+Trả lời TIẾNG VIỆT CÓ DẤU. Mọi từ/câu tiếng Việt phải dùng đầy đủ dấu tiếng Việt; không viết tiếng Việt không dấu. Cite file:line nếu nói về file thật trong repo.
 ```

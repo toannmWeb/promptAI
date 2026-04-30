@@ -28,7 +28,7 @@
   - **Confirmation Gate** — khi bắt buộc hỏi user trong IDE chat, gom mọi xác nhận vào 1 block trả lời bằng `OK` hoặc codes.
   - **`scripts/`** — validation framework (check-memory-bank, check-impact, build-context, verify-prompt, new-adr).
   - **Benchmark + CI gate** — `docs/BENCHMARK-MODE-1.md`, `scripts/check-all.sh`, `.github/workflows/template-ci.yml`.
-  - **Template Mode tooling** — `docs/TEMPLATE-MODE.md`, `scripts/check-template.sh`, workflow `apply skeleton to <project>`.
+  - **Template Mode tooling** — `docs/TEMPLATE-MODE.md`, `scripts/check-template.sh`, workflow `apply skeleton to <project>` và `overwrite prompt system in <project>`.
   - **`docs/CHANGE-IMPACT.md`** — lookup table sửa code X → update mb file Y.
   - **`docs/PROMPT-VALIDITY.md`** — checklist trước khi gửi prompt.
   - **5 personas** (Mary 📊, Winston 🏗, Amelia 💻, Casey 🔍, Quinn 🧐) + Party Mode 🎉 — distilled from BMAD-METHOD.
@@ -84,7 +84,7 @@ project-root/
 ├── .prompts/                        ← CANONICAL prompt library
 │   ├── system/base.md
 │   ├── personas/                    — 5 personas + party-mode
-│   ├── workflows/                   — 8 workflows (multi-phase)
+│   ├── workflows/                   — 9 workflows (multi-phase)
 │   ├── tasks/                       — 8 tasks (single-prompt)
 │   └── snippets/                    — 8 reusable snippets
 │
@@ -118,6 +118,7 @@ project-root/
 ### Khởi tạo project mới
 
 1. Từ repo master template, gõ AI: `apply skeleton to <project path>` hoặc copy thủ công theo `docs/TEMPLATE-MODE.md`.
+   - Nếu project đã có prompt/instruction cũ và bạn muốn thay toàn bộ bằng chuẩn template, dùng `overwrite prompt system in <project path>` thay vì merge.
 2. Trong project thật, gõ AI: `initialize memory bank`.
 3. AI quét code → fill 6 file core + ROADMAP.md sections 1, 5.
 4. Bạn review diff → Accept.
@@ -133,6 +134,9 @@ mode 1: <task>
 
 [apply template sang project thật]
 apply skeleton to <project path>
+
+[ghi đè prompt/instruction cũ bằng template, có backup]
+overwrite prompt system in <project path>
 
 [deep-dive 1 module]
 deep dive into lib/data/repositories/

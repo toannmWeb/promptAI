@@ -11,6 +11,7 @@ trigger-command: "apply skeleton to <project path>"
 # Workflow: Apply Skeleton To Project
 
 > Workflow này dùng khi repo master template đã ổn và bạn muốn áp dụng nó sang một project thật. Không chạy workflow này để fill memory-bank trong repo template gốc.
+> Nếu target project đã có prompt/instruction cũ và user muốn thay toàn bộ bằng chuẩn template thay vì merge, dùng `.prompts/workflows/overwrite-prompt-system.md`.
 
 ## Preconditions
 
@@ -58,7 +59,8 @@ Halt:
 - Stop if target path is unclear, source equals target, or target files would be overwritten without confirmation.
 
 Language:
-- Trả lời TIẾNG VIỆT.
+- Trả lời TIẾNG VIỆT CÓ DẤU.
+- Mọi từ/câu tiếng Việt phải dùng đầy đủ dấu tiếng Việt; không viết tiếng Việt không dấu.
 
 ## Phase 1: Safety check
 

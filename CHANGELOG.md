@@ -4,6 +4,26 @@
 
 ---
 
+## v3.2 — 2026-04-30 — Continuation Protocol + Multi-Tool + Production-Grade
+
+### Major changes
+
+- **Bumped `.prompts/system/base.md` to v1.7** — added 2 rules cốt lõi:
+  - Rule 23 **INLINE INPUT**: cần input → gom mọi câu hỏi vào 1 Confirmation Gate cùng response; không bao giờ nói "hỏi tôi ở request sau".
+  - Rule 24 **CONTINUATION HANDOFF**: output không fit 1 response → làm tối đa + lưu progress vào `memory-bank/activeContext.md` + in block `⏩ TIẾP TỤC REQUEST SAU` với prompt copy-paste cho user.
+- **Added section 8.1 Continuation Handoff block** trong base.md — chuẩn hóa block append cuối response khi rule 24 kích hoạt.
+- **Sync rule list** — `AGENTS.md` và `.github/copilot-instructions.md` mirror đủ 24 rules.
+- **Added `samples/gather-context.md`** — sample mới cho thu thập context lần đầu vào project: scan tối đa, ghi thẳng `memory-bank/`, hỗ trợ Continuation Handoff khi 1 request không đủ.
+- **Production-grade primitives** đã có từ v3.1.3 vẫn áp dụng: `dry-run.md`, `rollback-plan.md`, `self-verify.md`, multi-lens 5×5 trong Mode 1, depth-first rule, halt-conditions 23 điều kiện, multi-tool support (Copilot / Cursor / Cline / Claude Code / Aider / Antigravity / Gemini / Codex).
+- **Updated `docs/USAGE-GUIDE.md`** thêm reference samples/gather-context.
+- **Updated `samples/README.md`** thêm gather-context vào index.
+
+### Why
+
+Bản v3.2 đóng nốt gap cuối: lifecycle qua nhiều request. Trước đây nếu 1 task quá lớn cho 1 response, AI thường hoặc làm dở rồi ngừng, hoặc bảo "hỏi tôi ở request sau" làm user mất context. Continuation Handoff giúp AI tự lưu state vào `activeContext.md` và đưa prompt sẵn cho user paste tiếp — không cần giải thích lại từ đầu.
+
+---
+
 ## v3.1.1 — 2026-04-29 — Prompt Contract + Optimizer Upgrade
 
 ### Major changes

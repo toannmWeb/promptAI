@@ -61,11 +61,19 @@ audit template
 
 Khi áp dụng skeleton sang project thật:
 
-```
+``` 
 apply skeleton to <project path>
 ```
 
 Không chạy `initialize memory bank` trong repo master template này để fill facts của app cụ thể.
+
+Nếu target project đã có prompt/instruction cũ và user muốn thay bằng chuẩn template thay vì merge:
+
+```
+overwrite prompt system in <project path>
+```
+
+Workflow này dùng `.prompts/workflows/overwrite-prompt-system.md`, backup trước khi ghi đè và phải có confirmation gate.
 
 ### Cách 0.5: Mode 1 — One-Shot Max
 
@@ -125,8 +133,8 @@ Output sẽ là prompt đã chuẩn hóa Goal / Scope / Context / Acceptance Cri
 
 ## Ngôn ngữ
 
-Tất cả prompt mặc định **tiếng Việt**. Nếu cần tiếng Anh:
-- Đổi dòng "Trả lời TIẾNG VIỆT" → "Reply in ENGLISH".
+Tất cả prompt mặc định **tiếng Việt có dấu**. Nếu cần tiếng Anh:
+- Đổi dòng "Trả lời TIẾNG VIỆT CÓ DẤU" → "Reply in ENGLISH".
 
 ---
 

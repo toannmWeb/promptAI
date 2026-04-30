@@ -39,24 +39,38 @@ Nếu prompt thô mơ hồ, dùng `.prompts/tasks/optimize-prompt.md` trước k
 
 ## Rules
 
-1. Trả lời tiếng Việt trừ khi user yêu cầu khác.
-2. Cite `file:line` cho mọi claim về code thật.
-3. Tuân thủ memory-bank và ADR Active.
-4. Khi sửa file, dùng Edit/Agent mode, không paste diff dài trong chat.
-5. Không bịa file/function/API; nếu chưa thấy trong repo, nói rõ.
-6. Không claim done nếu chưa verify hoặc chưa nói rõ verification chưa chạy.
-7. Cuối câu trả lời substantive có Confidence, Assumptions, Verification commands, Decision points, Files touched, Memory-bank impact.
-8. Trong Template Mode, mọi thay đổi phải project-agnostic.
-9. Khi user gọi `mode 1`, dùng One-Shot Max: nhiều lens kiểm tra, output cô đọng, verification rõ.
-10. Khi cần user xác nhận, dùng Confirmation Gate: gom mọi câu hỏi vào một block, có recommended default, user trả lời `OK` hoặc `D-1=A`.
+> Rút gọn từ 24 rules trong `.prompts/system/base.md`. Khi conflict, `base.md` thắng.
+
+1. An toàn và chính xác ưu tiên tuyệt đối; không đánh đổi để lấy tốc độ, tiết kiệm token, hoặc làm hết trong 1 request.
+2. Trả lời tiếng Việt có dấu đầy đủ trừ khi user yêu cầu khác. Code, identifier, command, path, placeholder giữ nguyên.
+3. Cite `file:line` cho mọi claim về code thật; áp dụng `.prompts/snippets/force-cite.md`.
+4. Tuân thủ memory-bank và ADR Active.
+5. Khi sửa file, dùng Edit/Agent mode, không paste diff dài.
+6. Không bịa file/function/API; chưa thấy → nói rõ "không thấy trong codebase loaded".
+7. Ưu tiên smallest safe change — thay đổi nhỏ, reversible, theo pattern hiện có.
+8. Separate fact / inference / guess — facts có cite, inference nói rõ, guess đẩy vào Assumptions hoặc Decision points.
+9. Không claim done nếu chưa verify hoặc chưa nói rõ verification chưa chạy.
+10. Cuối câu trả lời substantive có cấu trúc Evidence → Inference → Decision → Verification → Next steps + Confidence, Assumptions, Decision points, Files touched, Memory-bank impact, Self-verify.
+11. Trong Template Mode, mọi thay đổi phải project-agnostic.
+12. Mode 1 → multi-lens (Code/Architecture/Security/Performance/DX + Mary/Winston/Amelia/Casey/Quinn) cô đọc, depth-first 1-3 vấn đề trọng yếu, chỉ sau khi risk preflight đạt.
+13. Confirmation Gate khi cần user input: gom mọi câu hỏi vào 1 block, recommended default, reply `OK` / `D-1=A` / `STOP`.
+14. **SCOPE LOCK**: chỉ sửa file trong `Scope: edit allowed`; cần mở scope → DỪNG hỏi.
+15. **DRY-RUN BEFORE BULK EDIT**: sửa > 3 file, mass refactor, destructive, migration, production config → bắt buộc preview + Confirmation Gate (`.prompts/snippets/dry-run.md`).
+16. **ROLLBACK PLAN**: mọi edit-files / migration / refactor phải có plan undo + backup trước khi thực thi (`.prompts/snippets/rollback-plan.md`).
+17. **SELF-VERIFY**: trước khi xuất output, đi qua `.prompts/snippets/self-verify.md`; nhóm fail sửa hoặc nêu rõ.
+18. **CONTEXT MUST READ**: mọi file khai báo trong `Context to load` phải được đọc thật sự trong phiên, không trả lời từ "trí nhớ".
+19. **INLINE INPUT**: cần input → gom mọi câu hỏi vào 1 Confirmation Gate cùng response; KHÔNG nói "hỏi tôi ở request sau".
+20. **CONTINUATION HANDOFF**: output không fit 1 response → làm tối đa + lưu progress vào `memory-bank/activeContext.md` + in block `⏩ TIẾP TỤC REQUEST SAU` với prompt copy-paste cho user.
 
 ## Commands
 
 | Command | Prompt file |
 |---|---|
+| `follow your custom instructions` | `.prompts/system/base.md` |
 | `initialize memory bank` | `.prompts/workflows/initialize-memory-bank.md` |
 | `mode 1 <task>` / `one-shot max <task>` | `.prompts/workflows/mode-1-one-shot-max.md` |
 | `apply skeleton to <project path>` | `.prompts/workflows/apply-to-project.md` |
+| `overwrite prompt system in <project path>` / `force apply skeleton to <project path>` | `.prompts/workflows/overwrite-prompt-system.md` |
 | `update memory bank` | `.prompts/workflows/update-memory-bank.md` |
 | `debug loop <bug>` | `.prompts/workflows/debug-loop.md` |
 | `deep dive into <module>` | `.prompts/workflows/deep-dive-learn.md` |
@@ -67,6 +81,10 @@ Nếu prompt thô mơ hồ, dùng `.prompts/tasks/optimize-prompt.md` trước k
 | `verify output` | `.prompts/tasks/verify-output.md` |
 | `plan feature <name>` | `.prompts/tasks/plan-feature.md` |
 | `trace flow <action>` | `.prompts/tasks/trace-flow.md` |
+| `explain module <path>` | `.prompts/tasks/explain-module.md` |
+| `extract pattern <name>` | `.prompts/tasks/extract-pattern.md` |
+| `document feature <name>` | `.prompts/tasks/document-feature.md` |
+| `party mode <topic>` | `.prompts/personas/party-mode.md` |
 
 ## Validation
 

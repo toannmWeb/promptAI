@@ -3,8 +3,8 @@ name: extract-pattern
 purpose: Tạo examples/<pattern>.md từ code thật (3+ usage)
 input: <pattern name + code reference 3+ examples>
 output: examples/<pattern>.md với template + sample code
-version: 1.0
-last-updated: 2026-04-29
+version: 1.1
+last-updated: 2026-04-30
 trigger-command: "extract pattern <name>"
 ---
 
@@ -52,31 +52,41 @@ trigger-command: "extract pattern <name>"
 
 ## Skeleton code
 
-```<language>
-// minimal complete example với placeholder <NAME>, <FIELD>, ...
+> Code dưới đây là pseudocode minh hoạ. Khi áp vào project thật, thay bằng cú pháp ngôn ngữ thực tế và pattern thật của repo.
+
+```pseudo
+// minimal complete example với placeholder <NAME>, <FIELD>, <DEP>, <ENDPOINT>
 class <NAME>Repository implements I<NAME>Repository {
-  final ApiClient _api;
-  
-  <NAME>Repository(this._api);
-  
-  @override
-  Future<<NAME>> get<NAME>(String id) async {
-    final response = await _api.get('/<endpoint>/$id');
-    return <NAME>.fromJson(response.data);
+  private <DEP> client
+
+  constructor(client: <DEP>) {
+    this.client = client
+  }
+
+  async get<NAME>(id: string): <NAME> {
+    response = await this.client.get("/<ENDPOINT>/" + id)
+    return <NAME>.fromJson(response.data)
   }
 }
 ```
 
 ## Real instances (cite file:line)
 
-- `lib/data/repositories/user_repository.dart:1` — UserRepository
-- `lib/data/repositories/site_repository.dart:1` — SiteRepository
-- `lib/data/repositories/photo_repository.dart:1` — PhotoRepository
+- `<path/to/instance-1>:<line>` — <NAME>Repository
+- `<path/to/instance-2>:<line>` — <ANOTHER_NAME>Repository
+- `<path/to/instance-3>:<line>` — <THIRD_NAME>Repository
 
 ## Tests for this pattern
 
-```<language>
-// test skeleton
+```pseudo
+// test skeleton — adapt theo test framework của project
+test("<NAME>Repository.get<NAME> returns entity from API") {
+  client = mock(<DEP>)
+  client.get("/<ENDPOINT>/123").returns({ id: "123", ... })
+  repo = new <NAME>Repository(client)
+  result = await repo.get<NAME>("123")
+  assert(result.id == "123")
+}
 ```
 
 ## Anti-patterns

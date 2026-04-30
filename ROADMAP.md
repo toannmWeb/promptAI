@@ -2,7 +2,7 @@
 
 > **Đây là god view của project.** Đọc TRƯỚC khi đọc bất kỳ file nào khác. Nhìn vào file này → biết hiểu cấu trúc, tìm gì ở đâu, đang làm gì, tiếp theo gì.
 >
-> **Version**: 1.0 · **Cập nhật cuối**: `<YYYY-MM-DD>` · **Skeleton**: prompt-system-skeleton v3.1.1
+> **Version**: 1.0 · **Cập nhật cuối**: `<YYYY-MM-DD>` · **Skeleton**: prompt-system-skeleton v3.2
 >
 > **Template Mode**: Repo này là master template prompt-system dùng chung cho mọi dự án. Không fill memory-bank bằng facts project cụ thể trong repo này; xem `docs/TEMPLATE-MODE.md`.
 
@@ -165,6 +165,7 @@
 | `initialize memory bank` | Lần đầu fill 6 file core từ codebase | `.prompts/workflows/initialize-memory-bank.md` |
 | `mode 1 <task>` | One-Shot Max: nhiều lens kiểm tra, output cô đọng, tối đa hóa 1 request | `.prompts/workflows/mode-1-one-shot-max.md` |
 | `apply skeleton to <project path>` | Copy/merge master template vào project thật | `.prompts/workflows/apply-to-project.md` |
+| `overwrite prompt system in <project path>` | Ghi đè prompt/instruction cũ bằng chuẩn template, có backup + confirmation gate | `.prompts/workflows/overwrite-prompt-system.md` |
 | `update memory bank` | Cập nhật memory-bank sau task | `.prompts/workflows/update-memory-bank.md` |
 | `follow your custom instructions` | Đọc memory-bank, tóm tắt, sẵn sàng | `.prompts/system/base.md` |
 | `deep dive into <module>` | Học cực sâu 1 module + lưu doc | `.prompts/workflows/deep-dive-learn.md` |
@@ -177,6 +178,7 @@
 | `extract pattern <name>` | Tạo `examples/<name>.md` từ code thật | `.prompts/tasks/extract-pattern.md` |
 | `explain module <path>` | Giải thích module + sequence diagram | `.prompts/tasks/explain-module.md` |
 | `plan feature <name>` | Brainstorm + tạo PRP draft | `.prompts/tasks/plan-feature.md` |
+| `document feature <name>` | Tạo `memory-bank/features/<name>.md` sau khi feature ship | `.prompts/tasks/document-feature.md` |
 | `trace flow <action>` | Trace 1 user action qua các tầng | `.prompts/tasks/trace-flow.md` |
 | `party mode <topic>` | Multi-perspective: Analyst + Architect + Dev + QA cùng debate | `.prompts/personas/party-mode.md` |
 
@@ -250,5 +252,5 @@ User trigger: "hey Analyst, ...", "Winston, ...", hoặc gõ command "party mode
 
 ## Footer
 
-Skeleton: [prompt-system-skeleton v3.1.1](https://github.com/<your-org>/prompt-system-skeleton)
+Skeleton: [prompt-system-skeleton v3.2](https://github.com/<your-org>/prompt-system-skeleton)
 Generated: `<YYYY-MM-DD>`

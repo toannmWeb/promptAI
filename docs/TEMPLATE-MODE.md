@@ -41,10 +41,11 @@ AI **được phép**:
 Sau khi copy skeleton sang project thật:
 
 1. Chạy workflow `apply skeleton to project`.
-2. Chạy `initialize memory bank`.
-3. Fill 6 core memory-bank bằng facts từ codebase thật.
-4. Customize `docs/CHANGE-IMPACT.md` theo cấu trúc project.
-5. Chạy `./scripts/check-memory-bank.sh` cho tới khi pass.
+2. Nếu target đã có prompt/instruction cũ không chuẩn và user muốn thay toàn bộ bằng template, chạy `overwrite prompt system in project` thay cho merge.
+3. Chạy `initialize memory bank`.
+4. Fill 6 core memory-bank bằng facts từ codebase thật.
+5. Customize `docs/CHANGE-IMPACT.md` theo cấu trúc project.
+6. Chạy `./scripts/check-memory-bank.sh` cho tới khi pass.
 
 Khi đó `<TODO>` trong core memory-bank là lỗi thật, không còn được phép giữ.
 

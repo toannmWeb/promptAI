@@ -1,132 +1,251 @@
-# Getting Started — Skeleton v3.1.1
+# Getting Started — Skeleton v3.2
 
-> Hướng dẫn chi tiết cho người mới. Nếu vội, đọc 3-step ở `README.md` rồi quay lại đây khi cần.
+> Hai path rõ ràng: **Path A — Project mới** (greenfield) hoặc **Path B — Project đã có code** (brownfield).
 >
-> v3.1 thêm nhiều layer so với v3.0 — đọc Phần "Step 0 v3.1 additions" dưới.
->
-> **Template Mode**: Repo gốc này là master template. Chỉ sau khi copy/apply sang project thật mới chạy `initialize memory bank`.
+> Đọc Step 0 chung trước, rồi rẽ nhánh theo path phù hợp.
 
 ---
 
-## Bạn cần gì
-
-- Một project (mới hoặc đã có code).
-- 1 AI tool: GitHub Copilot, Cursor, Claude Code, Cline, Aider, ... (đều work).
-- 60-90 phút lần đầu setup (v3.1 nhiều thứ hơn v3.0).
-- Bash shell (sẵn macOS / Linux / WSL / Git Bash trên Windows) — cho `scripts/*.sh`.
-
-## Step 0 — Hiểu skeleton (10 phút)
+## Step 0 — Hiểu skeleton (10 phút, đọc 1 lần)
 
 ### Architecture v3.1 — 5 layers
 
 ```
-Layer 5 — Interface           AGENTS.md, .github/copilot-instructions.md
-                              → Workflow commands, persona triggers
-                              ↓
-Layer 4 — Prompt library      .prompts/ (system + personas + workflows + tasks + snippets)
-                              → Canonical templates
-                              ↓
-Layer 3 — Project memory      memory-bank/ (6 core + optional)
-                              ROADMAP.md (god view)
-                              → Long-term context
-                              ↓
+Layer 5 — Interface           AGENTS.md, .github/copilot-instructions.md, GEMINI.md, CODEX.md
+Layer 4 — Prompt library      .prompts/ (system + personas + workflows + tasks + snippets) + samples/
+Layer 3 — Project memory      memory-bank/ (6 core + optional) + ROADMAP.md
 Layer 2 — Active artifacts    PRPs/, docs/adr/, docs/runbooks/, examples/, _logs/
-                              → Per-feature, per-decision artifacts
-                              ↓
 Layer 1 — Validation          scripts/, docs/CHANGE-IMPACT.md, docs/PROMPT-VALIDITY.md
-                              → Safety net
 ```
 
-→ Đọc top-down: AGENTS.md → .prompts/ → memory-bank/ → PRPs/ADR → scripts/.
+→ Đọc top-down: `AGENTS.md` → `.prompts/` → `memory-bank/` → PRPs/ADR → `scripts/`.
 
-### v3.1 additions vs v3.0
+### Bạn cần gì
 
-| Thêm gì | Để giải quyết |
+- 1 AI tool: GitHub Copilot, Cursor, Claude Code, Cline, Aider, Antigravity, Gemini, Codex.
+- Bash shell (macOS / Linux / WSL / Git Bash trên Windows) — chạy `scripts/*.sh`.
+- 30-60 phút lần đầu setup.
+
+### Decision: Path nào?
+
+| Tình huống | Path |
 |---|---|
-| `ROADMAP.md` | Q1.6 — cần file tổng quát "nhìn vào hiểu luôn" |
-| `.prompts/` library | Q1.4 — prompt đồng nhất chuẩn |
-| `.prompts/personas/` (5 + party) | Q1.3 — multi-perspective deep dive |
-| `.prompts/workflows/debug-loop.md` | Q2 — vòng lặp debug |
-| `.prompts/workflows/deep-dive-learn.md` | Q1.3 — học cực sâu |
-| `scripts/check-impact.sh` + `CHANGE-IMPACT.md` | Q1.5 — sửa code biết update mb gì |
-| `scripts/verify-prompt.sh` + `PROMPT-VALIDITY.md` | (+) — valid + complete |
-| `scripts/build-context.sh` | Q1.1 — bundle context cho prompt lớn |
-| `Casey 🔍 + Quinn 🧐` personas | Q1.2 — adversarial review |
-| `.prompts/tasks/optimize-prompt.md` + `prompt-contract.md` | Prompt thô → task contract đủ goal/scope/context/AC/verification |
-| `docs/REQUEST-MODES.md` + `mode-1-one-shot-max.md` | One-Shot Max cho task cần chất lượng cao nhất trong 1 request |
-| `docs/BENCHMARK-MODE-1.md` + `scripts/check-all.sh` | Chấm điểm Mode 1 và release gate cho master template |
-| `docs/TEMPLATE-MODE.md` + `scripts/check-template.sh` | Giữ repo master sạch, không lẫn facts của app cụ thể |
+| Project chưa có code, bắt đầu từ con số 0 | **Path A** |
+| Project đã có code nhưng chưa có prompt system | **Path B** |
+| Project đã có prompt system cũ không chuẩn, muốn thay bằng skeleton này | **Path B + workflow `overwrite prompt system`** |
 
-→ Đọc `memory-bank/README.md` để hiểu Memory Bank pattern.
+---
 
-## Step 1 — Copy skeleton vào project (3 phút)
+# 🟢 Path A — Project mới (greenfield)
 
-### Project mới
+## A1. Khởi tạo project (2 phút)
 
 ```bash
-# Giải nén skeleton tarball
-tar -xzf prompt-system-skeleton-v3.1.1.tar.gz
+# Tạo folder project
+mkdir my-project && cd my-project
+git init
 
-# Copy ra thư mục project mới
-cp -r prompt-system-skeleton-v3.1.1/* /path/to/your-project/
-cp -r prompt-system-skeleton-v3.1.1/.github /path/to/your-project/
+# Giải nén skeleton tarball (hoặc clone repo skeleton)
+tar -xzf /path/to/prompt-system-skeleton-v3.1.tar.gz --strip-components=1
 
-# Đảm bảo .gitignore không khoá file skeleton (xem .gitignore của skeleton)
+# Verify cấu trúc
+ls -la   # Phải thấy: .prompts/ memory-bank/ AGENTS.md ROADMAP.md scripts/ samples/ docs/
+ls -la .github/   # Phải thấy: copilot-instructions.md
 ```
 
-### Project đã có code
+## A2. Setup tool entry file (1 phút)
 
-Copy có chọn lọc — KHÔNG đè:
+Tùy AI tool đang dùng, đảm bảo entry file có đúng:
 
-**Copy** (file/folder mới hoàn toàn):
-- `memory-bank/` (toàn bộ folder)
-- `PRPs/` (nếu chưa có)
-- `examples/` (nếu chưa có)
-- `_logs/` (nếu chưa có)
-- `docs/adr/` (nếu chưa có — cẩn thận đừng đè ADR đã có)
-- `docs/runbooks/` (cẩn thận đừng đè)
+| Tool | File entry | Action |
+|---|---|---|
+| Copilot | `.github/copilot-instructions.md` | đã có sẵn |
+| Cursor | `AGENTS.md` | đã có sẵn |
+| Claude Code | `CLAUDE.md` → `AGENTS.md` | `ln -s AGENTS.md CLAUDE.md` |
+| Gemini | `GEMINI.md` | đã có sẵn |
+| Codex | `CODEX.md` | đã có sẵn |
+| Antigravity | user/workspace rules | xem `docs/setup/antigravity-setup.md` |
+| Cline | `AGENTS.md` + `.clinerules/` | đã có sẵn |
+| Aider | `AGENTS.md` | thêm `read: AGENTS.md` vào `.aider.conf.yml` |
 
-**Cẩn thận**:
-- `AGENTS.md` — nếu project đã có, merge nội dung thay vì đè.
-- `.github/copilot-instructions.md` — nếu đã có, merge.
-- `README.md` — KHÔNG copy đè README project.
+→ Chi tiết tất cả tool: `docs/setup/multi-tool-guide.md`.
 
-## Step 2 — Initialize Memory Bank trong project thật (10 phút)
+## A3. Khởi tạo Memory Bank (10 phút)
 
-Sau khi skeleton đã nằm trong project thật, mở AI tool tại project thật và gõ:
+Mở AI tool tại root project, gõ:
 
 ```
 initialize memory bank
 
 Yêu cầu:
-1. Quét code project trong <root>/<source-folder> để hiểu stack, architecture.
-2. Fill 6 file core trong memory-bank/ theo template:
-   - projectBrief.md: project là gì, goals, scope (HỎI tôi nếu chưa rõ)
-   - productContext.md: vấn đề giải quyết, user (HỎI tôi)
-   - activeContext.md: "Memory bank initialized today. Awaiting first task."
-   - systemPatterns.md: architecture từ code thật, cite file:line
-   - techContext.md: stack từ package.json/pubspec.yaml/requirements.txt
-   - progress.md: status hiện tại (đã có gì work, còn lại gì)
-3. Cite file:line khi đề cập code thật.
-4. Confidence + Assumptions + Decision Points cuối mỗi file.
-
+1. Hỏi tôi: project name, mục tiêu, scope, target user, stack dự kiến.
+2. Sau khi tôi trả lời, fill 6 file core trong memory-bank/ theo template:
+   - projectBrief.md
+   - productContext.md
+   - activeContext.md (ghi: "Memory bank initialized today. Awaiting first task.")
+   - systemPatterns.md (placeholder cho đến khi có code)
+   - techContext.md
+   - progress.md (status: "Project just started")
+3. Confidence + Assumptions + Decision Points cuối mỗi file.
 Dùng Edit/Agent mode để TỰ SỬA 6 file, không chỉ trả lời text.
 ```
 
-→ AI quét code 1-2 phút → xuất diff cho 6 file → bạn review + accept.
+→ AI hỏi 5-10 câu → bạn trả lời → AI fill 6 file → review + accept.
 
-→ Sau accept: 6 file core có content.
-
-Trong repo master template, không chạy bước này để fill facts project cụ thể. Kiểm tra template bằng:
+## A4. First commit (1 phút)
 
 ```bash
-./scripts/check-template.sh
-./scripts/check-memory-bank.sh --allow-template
+git add -A
+git commit -m "chore: bootstrap with prompt-system-skeleton v3.2"
 ```
 
-## Step 3 — Verify Memory Bank (5 phút)
+## A5. Checklist hoàn tất Path A
 
-Đầu conversation MỚI (đóng chat cũ, mở chat mới), gõ:
+- [ ] Tất cả 6 file `memory-bank/*.md` core không còn `<TODO>`.
+- [ ] Entry file đúng cho AI tool đang dùng (xem A2).
+- [ ] `bash scripts/check-memory-bank.sh` PASS (không cần `--allow-template`).
+- [ ] Mở chat MỚI, gõ `follow your custom instructions` → AI tóm tắt được project.
+- [ ] First commit đã push.
+
+→ Sang **Step 4 — Daily workflow** (cuối file).
+
+---
+
+# 🟡 Path B — Project đã có code (brownfield)
+
+## B1. Pre-flight: kiểm tra xung đột (3 phút)
+
+```bash
+cd /path/to/existing-project
+
+# Liệt kê file có thể xung đột
+ls AGENTS.md CLAUDE.md GEMINI.md CODEX.md 2>/dev/null
+ls .github/copilot-instructions.md 2>/dev/null
+ls .cursor/ .clinerules/ .aider.conf.yml 2>/dev/null
+ls memory-bank/ docs/adr/ PRPs/ examples/ 2>/dev/null
+```
+
+→ Note lại file/folder NÀO ĐÃ CÓ. Sau B3 sẽ merge thay vì đè.
+
+## B2. Backup project (BẮT BUỘC, 1 phút)
+
+```bash
+git status                                # đảm bảo working tree clean
+git checkout -b chore/adopt-prompt-skeleton
+git tag backup-pre-skeleton-$(date +%Y%m%d)
+```
+
+→ Nếu có sự cố, rollback bằng `git reset --hard backup-pre-skeleton-<date>`.
+
+## B3. Adopt skeleton — 2 cách
+
+### Cách 1: Workflow tự động (khuyến nghị)
+
+Mở AI tool tại project, gõ:
+
+```
+apply skeleton to <absolute path to project>
+
+Source skeleton: <absolute path to prompt-system-skeleton folder>
+Mode: merge-safe (KHÔNG đè file đã có; với AGENTS.md / .github/copilot-instructions.md / README.md, hỏi tôi confirm trước khi merge).
+Goal: project có đầy đủ .prompts/ memory-bank/ samples/ docs/ scripts/ AGENTS.md GEMINI.md CODEX.md, và .github/copilot-instructions.md.
+Tôn trọng: code app, README.md, .gitignore, ADR/PRP đã có.
+```
+
+→ Workflow này dùng `.prompts/workflows/apply-to-project.md`. Nó sẽ:
+1. Dry-run liệt kê file copy / merge / skip + Confirmation Gate.
+2. Sau khi user OK → copy file mới, merge file conflict.
+3. Đề xuất rollback plan.
+
+### Cách 2: Thủ công (kiểm soát chi tiết hơn)
+
+Copy có chọn lọc — KHÔNG ĐÈ:
+
+**Copy mới hoàn toàn (an toàn)**:
+```bash
+SKELETON=/path/to/prompt-system-skeleton-v3.1
+cp -rn "$SKELETON/.prompts" .
+cp -rn "$SKELETON/samples" .
+cp -rn "$SKELETON/scripts" .
+cp -rn "$SKELETON/docs" .              # cẩn thận nếu đã có docs/
+cp -rn "$SKELETON/memory-bank" .
+cp -rn "$SKELETON/PRPs" .              # nếu đã có PRPs cũ → -n giữ nguyên
+cp -rn "$SKELETON/examples" .
+cp -rn "$SKELETON/_logs" .
+cp -n "$SKELETON/ROADMAP.md" .
+cp -n "$SKELETON/INITIAL.md" .
+```
+
+`cp -n` = no-clobber, không đè file tồn tại.
+
+**File entry — xử lý conflict thủ công**:
+
+| File | Project đã có? | Hành động |
+|---|---|---|
+| `AGENTS.md` | Không | `cp $SKELETON/AGENTS.md .` |
+| `AGENTS.md` | Có | Merge: giữ project rules + thêm 22 rules từ skeleton + thêm command table |
+| `.github/copilot-instructions.md` | Không | `cp $SKELETON/.github/copilot-instructions.md .github/` |
+| `.github/copilot-instructions.md` | Có | Merge: giữ rule project-specific + append section "Skeleton rules" từ template |
+| `GEMINI.md` / `CODEX.md` | Không | `cp $SKELETON/GEMINI.md . ; cp $SKELETON/CODEX.md .` |
+| `GEMINI.md` / `CODEX.md` | Có | Merge tương tự AGENTS.md |
+| `README.md` | Có | **KHÔNG đè**. Có thể thêm 1 dòng "Project follows prompt-system-skeleton v3.1, xem AGENTS.md" |
+
+**Mẹo merge AGENTS.md/.github**: dùng AI tool gõ:
+
+```
+merge skeleton AGENTS.md vào AGENTS.md hiện có:
+- Giữ TẤT CẢ project-specific rules đang có.
+- Thêm section "Bootstrap" từ skeleton (đọc memory-bank/...).
+- Thêm "Rules cốt lõi (priority order)" 22 rules từ skeleton.
+- Thêm "Workflow commands" table.
+- Thêm "Tool-specific notes".
+- Conflict rule → hỏi tôi chọn rule nào thắng.
+Output: AGENTS.md đã merge + diff cho tôi review.
+```
+
+### Cách 3: Force overwrite (chỉ khi muốn dọn sạch prompt cũ)
+
+Nếu project có prompt/instruction cũ không chuẩn và muốn thay bằng skeleton làm nguồn sự thật duy nhất:
+
+```
+overwrite prompt system in <project path>
+```
+
+Workflow này backup file cũ → ghi đè → có Confirmation Gate. Mặc định vẫn giữ `README.md`, code app, `memory-bank/`, `ROADMAP.md`, `docs/adr/`, `PRPs/`, `examples/`, `_logs/`.
+
+## B4. Initialize Memory Bank trên codebase có sẵn (15 phút)
+
+Mở AI tool tại project, gõ:
+
+```
+initialize memory bank
+
+Project này ĐÃ CÓ CODE. Yêu cầu:
+1. Quét code trong <root>/<source-folder> (ví dụ: src/, app/, lib/).
+2. Đọc README.md, package.json/pubspec.yaml/requirements.txt/Cargo.toml để hiểu stack.
+3. Fill 6 file core trong memory-bank/ theo template, dựa CHỦ YẾU vào code thật:
+   - projectBrief.md: project là gì (suy ra từ README, name) — HỎI tôi confirm goals.
+   - productContext.md: vấn đề giải quyết — HỎI tôi nếu code không nói rõ.
+   - activeContext.md: ghi "Adopted skeleton today. Awaiting first task on <hotspot module>".
+   - systemPatterns.md: architecture từ code thật, cite file:line.
+   - techContext.md: stack từ manifest files.
+   - progress.md: status hiện tại từ git log + code coverage cảm nhận được.
+4. Cite file:line khi đề cập code thật. Không bịa.
+5. Confidence + Assumptions + Decision Points cuối mỗi file.
+
+Dùng Edit/Agent mode để TỰ SỬA 6 file. Risk preflight + dry-run trước khi ghi.
+```
+
+→ AI quét code 2-5 phút → xuất diff cho 6 file → bạn review + accept.
+
+## B5. Verify (5 phút)
+
+```bash
+bash scripts/check-memory-bank.sh        # phải PASS (không cần --allow-template)
+bash scripts/check-impact.sh src/        # demo: thử check 1 path code
+```
+
+Mở chat MỚI, gõ:
 
 ```
 follow your custom instructions
@@ -134,21 +253,39 @@ follow your custom instructions
 Tóm tắt project này dựa trên memory-bank.
 ```
 
-→ AI đọc memory-bank, tóm tắt 5-10 dòng. Verify:
-
-- [ ] AI nhắc đúng project name.
-- [ ] AI biết stack chính.
-- [ ] AI biết architecture chính (layers/modules).
+Verify:
+- [ ] AI nhắc đúng project name + mục tiêu.
+- [ ] AI biết stack chính (cite được file manifest).
+- [ ] AI biết architecture chính (layers/modules) + cite file:line được khi hỏi sâu.
 - [ ] AI biết "đang làm gì NOW" từ activeContext.
-- [ ] AI cite file:line được khi hỏi tiếp.
 
-→ Nếu OK → Memory Bank work.
+## B6. Commit (1 phút)
 
-→ Nếu sai → đọc lại memory-bank, fix file sai, gõ `update memory bank`.
+```bash
+git add -A
+git diff --cached --stat                  # review tổng quan
+git commit -m "chore: adopt prompt-system-skeleton v3.2"
+git push -u origin chore/adopt-prompt-skeleton
+```
 
-## Step 4 — Daily workflow
+→ Tạo PR review trước khi merge vào main.
 
-### Bắt đầu task mới
+## B7. Checklist hoàn tất Path B
+
+- [ ] Backup tag `backup-pre-skeleton-<date>` đã tạo.
+- [ ] `.prompts/`, `samples/`, `scripts/`, `docs/`, `memory-bank/`, `ROADMAP.md` đã có.
+- [ ] `AGENTS.md` + `.github/copilot-instructions.md` (+ `GEMINI.md` / `CODEX.md` nếu dùng) đã merge.
+- [ ] 6 file `memory-bank/*.md` core không còn `<TODO>`.
+- [ ] `bash scripts/check-memory-bank.sh` PASS.
+- [ ] AI tóm tắt được project trong chat MỚI.
+- [ ] Code app KHÔNG bị đụng (chỉ thêm file, không modify code).
+- [ ] PR đã tạo + có người review.
+
+---
+
+# Step 4 — Daily workflow (chung cho cả 2 path)
+
+## Bắt đầu task mới
 
 ```
 follow your custom instructions
@@ -156,30 +293,27 @@ follow your custom instructions
 <task description>
 ```
 
-Nếu task quan trọng hoặc prompt còn mơ hồ, chạy pre-flight trước:
+Nếu task quan trọng hoặc prompt mơ hồ:
 
 ```
 optimize prompt:
 <draft prompt>
 ```
 
-Sau đó paste prompt đã tối ưu để AI thực thi.
-
-Nếu bạn muốn tiết kiệm request và ép AI làm hết mức trong 1 lần:
+Tiết kiệm request, ép AI làm hết mức trong 1 lần:
 
 ```
 mode 1: <task>
 ```
 
-### Trong task — sửa file
+## Sửa file
 
 Dùng Edit/Agent mode của tool:
-- **Copilot**: tab "Edit" trong panel chat (Ctrl+Shift+I trên Win 11).
+- **Copilot**: tab Edit (Ctrl+Shift+I).
 - **Cursor**: Composer (Ctrl+I).
-- **Claude Code**: native (mặc định Agent).
-- **Cline**: native (mặc định Agent).
+- **Claude Code / Cline / Antigravity**: native Agent.
 
-### Sau task — update memory bank
+## Sau task — update memory bank
 
 Sau khi feature done / quyết định kiến trúc / refactor lớn:
 
