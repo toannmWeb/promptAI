@@ -73,7 +73,7 @@ Mở Workspace Rules tab cho project đang dùng, paste nội dung sau:
 ## Bootstrap (đọc theo thứ tự đầu mọi task)
 1. ROADMAP.md — god view.
 2. AGENTS.md — full rules + workflow commands.
-3. .prompts/system/base.md — 22 rules cốt lõi.
+3. .prompts/system/base.md — 24 rules cốt lõi.
 4. 6 file core memory-bank/:
    - memory-bank/projectBrief.md
    - memory-bank/productContext.md
@@ -207,5 +207,5 @@ Antigravity giỏi multi-step autonomous, Copilot giỏi quick edit / single-lin
 
 - [multi-tool-guide.md](multi-tool-guide.md) — setup các tool khác.
 - [../../AGENTS.md](../../AGENTS.md) — full rules.
-- [../../.prompts/system/base.md](../../.prompts/system/base.md) — 22 rules source of truth.
+- [../../.prompts/system/base.md](../../.prompts/system/base.md) — 24 rules source of truth.
 - [../USAGE-GUIDE.md](../USAGE-GUIDE.md) — bảng tra cứu tình huống → prompt.

@@ -47,9 +47,9 @@ emit_file() {
     emit ""
     emit "## File: \`$rel\`"
     emit ""
-    emit '```markdown'
+    emit '````markdown'
     cat "$f" >> "$OUTFILE"
-    emit '```'
+    emit '````'
     emit ""
   fi
 }

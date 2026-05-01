@@ -53,9 +53,9 @@
 
 | Topic / Domain | Where to look | Status |
 |---|---|---|
-| `<auth>` | `memory-bank/features/auth.md`, `memory-bank/integrations/firebase-auth.md`, `docs/adr/0002-auth-strategy.md` | active |
-| `<data-sync>` | `memory-bank/features/offline-sync.md`, `docs/adr/0003-sync-engine.md` | active |
-| `<reporting>` | `memory-bank/features/daily-report.md`, `examples/add-new-report.md` | planned |
+| `<user-auth>` | `memory-bank/features/auth.md`, `memory-bank/integrations/<auth-provider>.md`, `docs/adr/0002-auth-strategy.md` | active |
+| `<data-layer>` | `memory-bank/features/<data-feature>.md`, `docs/adr/0003-<data-decision>.md` | active |
+| `<reporting>` | `memory-bank/features/<report-feature>.md`, `examples/<report-pattern>.md` | planned |
 | ... | ... | ... |
 
 > Khi tạo feature/domain/integration mới: thêm 1 row vào bảng này + tạo file tương ứng dưới `memory-bank/features/` hoặc `memory-bank/domains/`.

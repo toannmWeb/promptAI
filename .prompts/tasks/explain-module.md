@@ -86,7 +86,7 @@ sequenceDiagram
 
 ## Halt conditions
 
-- Module > 30 file → suggest `deep-dive-learn` instead.
+- Module > 30 file → chia thành sub-modules trước (list sub-folders, chọn 1 sub-module < 30 file để bắt đầu); hoặc suggest `deep-dive-learn` nếu user cần full lifecycle doc.
 - Module mostly generated code → ask user clarify what to focus on.
 
 ## Prompt template

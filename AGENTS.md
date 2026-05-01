@@ -19,7 +19,7 @@ ROADMAP.md                      ← god view (đọc 30s, biết tìm gì ở đ
 ### 1. System base prompt
 
 ```
-.prompts/system/base.md         ← rules cốt lõi (22 rules + halt + output format + self-verify)
+.prompts/system/base.md         ← rules cốt lõi (24 rules + halt + output format + self-verify)
 ```
 
 ### 2. Memory Bank (BẮT BUỘC, đầu mọi task)
@@ -69,7 +69,7 @@ examples/<pattern>.md      — code pattern + sample code
 
 ## Rules cốt lõi (priority order)
 
-> Mirror đầy đủ 22 rules trong `.prompts/system/base.md` section 7. Khi conflict, `base.md` là source of truth.
+> Mirror đầy đủ 24 rules trong `.prompts/system/base.md` section 7. Khi conflict, `base.md` là source of truth.
 
 1. **SAFETY + ACCURACY FIRST** — an toàn và chính xác ưu tiên tuyệt đối; không đánh đổi để lấy tốc độ, tiết kiệm token, hoặc làm hết trong 1 request.
 2. **HỎI khi không chắc** — Decision Points bắt buộc list ở cuối câu trả lời.

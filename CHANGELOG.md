@@ -65,7 +65,7 @@ This upgrade targets the user's "mỗi prompt phải tận dụng AI triệt đ�
 
 - **Added ROADMAP.md** at root — single-pane god view (Q1.6 user concern).
 - **Added `.prompts/` library** — canonical prompt library:
-  - `system/base.md` — 12 rules cốt lõi.
+  - `system/base.md` — 12 rules cốt lõi (bumped to 24 in v3.2).
   - `personas/` — 5 personas distilled from BMAD-METHOD: Mary 📊 (Analyst), Winston 🏗 (Architect), Amelia 💻 (Dev), Casey 🔍 (QA), Quinn 🧐 (Reviewer) + Party Mode 🎉.
   - `workflows/` — 6 multi-phase workflows: deep-dive-learn, debug-loop, refactor-safe, feature-end-to-end, initialize-memory-bank, update-memory-bank.
   - `tasks/` — 6 single-prompt tasks: explain-module, extract-pattern, verify-output, plan-feature, document-feature, trace-flow.

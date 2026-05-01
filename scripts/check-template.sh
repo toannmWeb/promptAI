@@ -157,13 +157,14 @@ fi
 echo
 
 echo "## 7. Memory-bank template validation"
-if "$ROOT/scripts/check-memory-bank.sh" --allow-template >/tmp/check-template-memory-bank.out 2>&1; then
+TMPOUT=$(mktemp)
+if "$ROOT/scripts/check-memory-bank.sh" --allow-template >"$TMPOUT" 2>&1; then
   log_pass "check-memory-bank.sh --allow-template passed"
 else
   log_fail "check-memory-bank.sh --allow-template failed"
-  [ "$VERBOSE" -eq 1 ] && cat /tmp/check-template-memory-bank.out
+  [ "$VERBOSE" -eq 1 ] && cat "$TMPOUT"
 fi
-rm -f /tmp/check-template-memory-bank.out
+rm -f "$TMPOUT"
 echo
 
 echo "## 8. Counts"

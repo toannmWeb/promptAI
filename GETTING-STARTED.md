@@ -24,6 +24,7 @@ Layer 1 — Validation          scripts/, docs/CHANGE-IMPACT.md, docs/PROMPT-VAL
 
 - 1 AI tool: GitHub Copilot, Cursor, Claude Code, Cline, Aider, Antigravity, Gemini, Codex.
 - Bash shell (macOS / Linux / WSL / Git Bash trên Windows) — chạy `scripts/*.sh`.
+  - **Windows users**: cài [Git for Windows](https://gitforwindows.org/) (bao gồm Git Bash) hoặc dùng WSL. PowerShell không hỗ trợ trực tiếp các validation scripts.
 - 30-60 phút lần đầu setup.
 
 ### Decision: Path nào?
@@ -183,7 +184,7 @@ cp -n "$SKELETON/INITIAL.md" .
 | File | Project đã có? | Hành động |
 |---|---|---|
 | `AGENTS.md` | Không | `cp $SKELETON/AGENTS.md .` |
-| `AGENTS.md` | Có | Merge: giữ project rules + thêm 22 rules từ skeleton + thêm command table |
+| `AGENTS.md` | Có | Merge: giữ project rules + thêm 24 rules từ skeleton + thêm command table |
 | `.github/copilot-instructions.md` | Không | `cp $SKELETON/.github/copilot-instructions.md .github/` |
 | `.github/copilot-instructions.md` | Có | Merge: giữ rule project-specific + append section "Skeleton rules" từ template |
 | `GEMINI.md` / `CODEX.md` | Không | `cp $SKELETON/GEMINI.md . ; cp $SKELETON/CODEX.md .` |
@@ -196,7 +197,7 @@ cp -n "$SKELETON/INITIAL.md" .
 merge skeleton AGENTS.md vào AGENTS.md hiện có:
 - Giữ TẤT CẢ project-specific rules đang có.
 - Thêm section "Bootstrap" từ skeleton (đọc memory-bank/...).
-- Thêm "Rules cốt lõi (priority order)" 22 rules từ skeleton.
+- Thêm "Rules cốt lõi (priority order)" 24 rules từ skeleton.
 - Thêm "Workflow commands" table.
 - Thêm "Tool-specific notes".
 - Conflict rule → hỏi tôi chọn rule nào thắng.

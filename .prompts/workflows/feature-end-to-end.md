@@ -122,6 +122,8 @@ After each phase:
 
 → Total ~5-10 prompts cho full feature.
 
+> **Lưu ý**: Một số tool (vd Copilot Chat) **reset context mỗi turn**. Giữa các phases, lưu state vào `memory-bank/activeContext.md` để phase sau có thể reload. Khi chuyển persona, bắt đầu prompt mới bằng "Đọc `memory-bank/activeContext.md` trước."
+
 ## Halt conditions
 
 DỪNG nếu:

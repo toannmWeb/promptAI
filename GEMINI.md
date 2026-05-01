@@ -9,7 +9,7 @@
 ## Bootstrap (đọc theo thứ tự)
 
 1. [ROADMAP.md](ROADMAP.md) — god view, biết tìm gì ở đâu.
-2. [.prompts/system/base.md](.prompts/system/base.md) — 22 rules cốt lõi + halt + output format + self-verify.
+2. [.prompts/system/base.md](.prompts/system/base.md) — 24 rules cốt lõi + halt + output format + self-verify.
 3. [AGENTS.md](AGENTS.md) — full rules + persona + workflow commands + tool-specific notes.
 4. 6 file core memory-bank:
    - [memory-bank/projectBrief.md](memory-bank/projectBrief.md)

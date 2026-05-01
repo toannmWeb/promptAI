@@ -13,6 +13,7 @@ Trong repo master template này, mọi persona phải giữ **Template Mode**: t
 | **Dev (Amelia)** | 💻 | Test-first impl, file:line citation | Code feature, sửa bug, refactor |
 | **QA (Casey)** | 🔍 | Adversarial review, edge case hunter | Review output AI vừa làm, hunt edge case |
 | **Reviewer (Quinn)** | 🧐 | Cynical review, validity + completeness | Verify prompt/spec đủ và đúng trước khi gửi AI |
+| **Party Mode** | 🎉 | Multi-persona debate | `party mode <topic>` — Mary + Winston + Amelia + Casey cùng debate |
 
 ## Cách gọi
 

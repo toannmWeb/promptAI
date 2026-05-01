@@ -12,7 +12,7 @@
 
 ```
 .prompts/
-├── system/         base.md                     ← rules cốt lõi 22 rules, AUTO load
+├── system/         base.md                     ← rules cốt lõi 24 rules, AUTO load
 ├── personas/       analyst, architect, dev, qa, reviewer, party-mode
 ├── workflows/      multi-step processes (debug-loop, refactor-safe, ...)
 ├── tasks/          single-step tasks (optimize-prompt, plan-feature, ...)

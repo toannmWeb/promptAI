@@ -92,7 +92,7 @@ echo "## Validity (format)"
 check_cmd "Has task contract fields" "contains 'goal|mục tiêu' && contains 'scope|phạm vi' && contains 'context|ngữ cảnh' && contains 'acceptance|AC-|tiêu chí' && contains 'verification|kiểm chứng|verify' && contains 'output|đầu ra|format' && contains 'halt|dừng|stop'"
 check "Has memory-bank reference"       'memory-bank|đọc memory'
 check "Has scope (file/folder/feature)" 'scope|phạm vi|file:|folder:|feature:|module|edit allowed|do not touch'
-check "Has acceptance criteria (AC)"    'AC-|acceptance|tiêu chí chấp nhận|expected output|deliver|done nghĩa là|testable'
+check "Has acceptance criteria (AC)"    'AC[-:]|acceptance|tiêu chí chấp nhận|expected output|deliver|done nghĩa là|testable'
 check "Requests cite file:line"         'cite|file:line|reference|dẫn chứng|trích dẫn'
 check "Requests Confidence + Assumptions" 'confidence|assumption|giả định'
 check "Requests Decision Points"        'decision|D-1|options|quyết định'

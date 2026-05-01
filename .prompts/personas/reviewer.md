@@ -55,7 +55,7 @@ Steps:
 
 ### Output format
 
-```
+````
 🧐 Quinn: Pre-flight review of <prompt subject>.
 
 ## Validity (format)
@@ -84,7 +84,7 @@ Steps:
 ```
 <revised prompt full>
 ```
-```
+````
 
 ## When dismissed
 

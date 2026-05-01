@@ -12,6 +12,8 @@ trigger-command: "debug loop <bug>" / "Amelia, debug loop"
 # Workflow: Debug Loop
 
 > Vòng lặp **scan → hypothesis → verify → fix → re-test → loop**. Tận dụng max 1 request mỗi iteration. Chấm dứt chỉ khi bug REPRODUCIBLE → FIXED → VERIFIED → DOCUMENTED.
+>
+> **Pre-check**: Workflow này yêu cầu test framework đã setup. Nếu chưa có → setup trước khi bắt đầu loop (vd: `npm init jest`, `pytest --co`, `flutter test`).
 
 ## Tại sao cần workflow này
 

@@ -11,6 +11,8 @@ trigger-command: "refactor safely <scope>" / "Winston, refactor strategy"
 # Workflow: Refactor Safely
 
 > Refactor **không đổi behavior**. Bắt buộc test-first. Scope-bounded. Reversible (nếu xấu, revert dễ).
+>
+> **Pre-check**: Workflow này yêu cầu test framework đã setup và có test baseline. Nếu chưa có test → Phase 2 sẽ tạo characterization tests, nhưng cần test runner sẵn sàng.
 
 ## Phases
 

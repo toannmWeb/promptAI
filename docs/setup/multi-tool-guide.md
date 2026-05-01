@@ -80,7 +80,7 @@ File entry: User/Workspace rules trong Antigravity UI (paste thủ công)
 Tóm tắt:
 1. Mở Antigravity → Settings → Rules.
 2. Tạo Workspace rule (per-project) hoặc User rule (cross-project).
-3. Paste nội dung từ `AGENTS.md` (toàn bộ) HOẶC tóm tắt 22 rules + bootstrap section.
+3. Paste nội dung từ `AGENTS.md` (toàn bộ) HOẶC tóm tắt 24 rules + bootstrap section.
 4. Save.
 
 ---
@@ -227,6 +227,6 @@ Tool phải:
 ## 7. Đọc thêm
 
 - [AGENTS.md](../../AGENTS.md) — full rules + workflow commands.
-- [.prompts/system/base.md](../../.prompts/system/base.md) — 22 rules cốt lõi (source of truth).
+- [.prompts/system/base.md](../../.prompts/system/base.md) — 24 rules cốt lõi (source of truth).
 - [docs/USAGE-GUIDE.md](../USAGE-GUIDE.md) — bảng tra cứu tình huống → prompt.
 - [antigravity-setup.md](antigravity-setup.md) — Antigravity setup chi tiết.

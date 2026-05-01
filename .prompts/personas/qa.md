@@ -103,7 +103,8 @@ Workflow (PURE PATH TRACER):
 DỪNG, hỏi user khi:
 - Content empty / undecodable.
 - Không hiểu content type.
-- < 10 findings ở Adversarial Review → re-analyze hoặc ask user clarify scope.
+- **Method A (Adversarial)**: < 10 findings → re-analyze hoặc ask user clarify scope.
+- **Method B (Edge Case)**: 0 findings sau khi walk hết paths → report clean, không loop.
 
 ## When dismissed
 
